@@ -29,6 +29,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -45,9 +46,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -98,7 +101,8 @@ button:focus-visible {
   color: #eee;
 }
 
-p, small {
+p,
+small {
   color: #ddd;
 }
 
@@ -124,7 +128,7 @@ p, small {
 }
 
 .elenco-card img {
-  box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
   transition: transform 0.3s ease;
   border-radius: 8px;
   max-height: 140px;
@@ -162,6 +166,7 @@ p, small {
   background-color: #2c2c2c;
   border-color: #444;
 }
+
 .btn-secondary:hover {
   background-color: #3d3d3d;
   border-color: #646cff;
@@ -198,69 +203,93 @@ p, small {
   display: grid;
   gap: 1.5rem;
 }
+
 @media (min-width: 768px) {
   .movie-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
 @media (min-width: 992px) {
   .movie-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
+/* ===== Movie Card ===== */
 .movie-card {
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   background-color: #1e1e1e;
-  transition: transform 0.25s, box-shadow 0.25s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
 }
 
 .movie-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.7);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.8);
 }
 
 .movie-card img {
   width: 100%;
-  aspect-ratio: 2/3;
+  height: 320px;
   object-fit: cover;
+  border-bottom: 1px solid #333;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover img {
+  transform: scale(1.05);
 }
 
 .movie-card-body {
-  padding: 0.5rem;
+  padding: 0.75rem 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .movie-card-title {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0.4rem 0 0.2rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #eee;
+  margin: 0 0 0.4rem 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .movie-card-date {
   font-size: 0.85rem;
   color: #bbb;
+  margin-bottom: 0.5rem;
 }
 
 .movie-card-vote {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background-color: #333;
+  align-self: flex-start;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
   color: #fff;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-weight: 600;
+  background-color: #333;
+  transition: background-color 0.3s ease;
 }
 
 .movie-card-vote.text-success {
   background-color: #28a745;
+  color: #fff !important;
 }
 
 .movie-card-vote.text-danger {
   background-color: #dc3545;
+  color: #fff !important;
 }
 
 /* ===== Prefer color scheme light ===== */
@@ -269,9 +298,11 @@ p, small {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }

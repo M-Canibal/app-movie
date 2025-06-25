@@ -38,11 +38,9 @@ function MovieListPage({ title, endpoint, fixedSort }) {
   return (
     <div className="container" style={{ paddingTop: '70px' }}>
       <h2 className="mb-4">{title}</h2>
-      <div className="row">
+      <div className="movie-grid">
         {movies.map((movie) => (
-          <div key={movie.id} className="col-6 col-md-4 col-lg-3 mb-4">
-            <MovieCard movie={movie} />
-          </div>
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
     </div>

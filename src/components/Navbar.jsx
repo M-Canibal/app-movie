@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 function NavItem({ to, iconClass, children }) {
   return (
@@ -12,22 +12,32 @@ function NavItem({ to, iconClass, children }) {
 }
 
 function Navbar({ onSearch }) {
+  const bsCollapseRef = useRef(null);
+
   const handleSearch = (e) => {
     onSearch(e.target.value);
   };
 
-  // Fecha o menu ao clicar em um item (mobile)
   useEffect(() => {
     const navLinks = document.querySelectorAll('.navbar-collapse .nav-link');
     const bsCollapse = document.getElementById('navbarNav');
+    bsCollapseRef.current = bsCollapse;
+
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         if (window.getComputedStyle(bsCollapse).display !== 'none') {
-          const bsCollapseObj = bootstrap.Collapse.getInstance(bsCollapse);
+          const bsCollapseObj = window.bootstrap?.Collapse.getInstance(bsCollapse);
           if (bsCollapseObj) bsCollapseObj.hide();
         }
       });
     });
+
+    // Cleanup event listeners
+    return () => {
+      navLinks.forEach(link => {
+        link.replaceWith(link.cloneNode(true));
+      });
+    };
   }, []);
 
   return (

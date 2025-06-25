@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MovieCard from '../components/MovieCard';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -84,9 +85,9 @@ function Home({ searchTerm }) {
   };
 
   return (
-    <div className="container my-5" style={{ paddingTop: '80px' }}>
+    <div className="container" style={{ paddingTop: '80px' }}>
       <div className="d-flex justify-content-between align-items-center flex-wrap mb-4">
-        <h2 className="text-white fw-bold mb-3 mb-md-0">🎬 Filmes em Alta</h2>
+        <h2 className="home-title">Filmes em alta</h2>
 
         {!loading && (
           <div className="d-flex align-items-center gap-2">
@@ -108,13 +109,7 @@ function Home({ searchTerm }) {
         )}
       </div>
 
-      {loading && (
-        <div className="d-flex justify-content-center my-5">
-          <div className="spinner-border text-primary" role="status" aria-label="Carregando">
-            <span className="visually-hidden">Carregando...</span>
-          </div>
-        </div>
-      )}
+      {loading && <LoadingSpinner />}
 
       {error && <div className="alert alert-danger">{error}</div>}
 
@@ -124,11 +119,9 @@ function Home({ searchTerm }) {
         </div>
       )}
 
-      <div className="row">
+      <div className="movie-grid">
         {movies.map((movie) => (
-          <div key={movie.id} className="col-6 col-md-4 col-lg-3 mb-4">
-            <MovieCard movie={movie} />
-          </div>
+          <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>
     </div>
