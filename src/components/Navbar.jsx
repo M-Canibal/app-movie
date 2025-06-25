@@ -1,9 +1,34 @@
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+
+function NavItem({ to, iconClass, children }) {
+  return (
+    <li className="nav-item">
+      <Link className="nav-link d-flex align-items-center" to={to}>
+        <i className={`${iconClass} me-1`}></i> {children}
+      </Link>
+    </li>
+  );
+}
 
 function Navbar({ onSearch }) {
   const handleSearch = (e) => {
     onSearch(e.target.value);
   };
+
+  // Fecha o menu ao clicar em um item (mobile)
+  useEffect(() => {
+    const navLinks = document.querySelectorAll('.navbar-collapse .nav-link');
+    const bsCollapse = document.getElementById('navbarNav');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.getComputedStyle(bsCollapse).display !== 'none') {
+          const bsCollapseObj = bootstrap.Collapse.getInstance(bsCollapse);
+          if (bsCollapseObj) bsCollapseObj.hide();
+        }
+      });
+    });
+  }, []);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
@@ -21,42 +46,19 @@ function Navbar({ onSearch }) {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div
-          className="collapse navbar-collapse d-flex align-items-center justify-content-between"
-          id="navbarNav"
-        >
-          <ul
-            className="navbar-nav mx-auto mb-2 mb-lg-0 d-flex"
-            style={{ justifyContent: 'center', gap: '2rem', width: '100%' }}
-          >
-            <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center" to="/">
-                <i className="bi bi-fire me-1"></i> Tendências
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center" to="/populares">
-                <i className="bi bi-star-fill me-1"></i> Populares
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center" to="/lancamentos">
-                <i className="bi bi-calendar-event me-1"></i> Lançamentos
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link d-flex align-items-center" to="/top">
-                <i className="bi bi-trophy-fill me-1"></i> Top Avaliados
-              </Link>
-            </li>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 nav-center-gap">
+            <NavItem to="/" iconClass="bi bi-fire">Tendências</NavItem>
+            <NavItem to="/populares" iconClass="bi bi-star-fill">Populares</NavItem>
+            <NavItem to="/lancamentos" iconClass="bi bi-calendar-event">Lançamentos</NavItem>
+            <NavItem to="/top" iconClass="bi bi-trophy-fill">Top Avaliados</NavItem>
           </ul>
 
           <input
             type="search"
-            className="form-control w-auto"
+            className="form-control w-auto align-self-center navbar-search"
             placeholder="Buscar filmes..."
             onChange={handleSearch}
-            style={{ minWidth: '200px' }}
           />
         </div>
       </div>

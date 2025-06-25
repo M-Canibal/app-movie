@@ -32,7 +32,7 @@ function Home({ searchTerm }) {
           throw new Error(`Erro na requisição: ${response.status}`);
         }
 
-        let results = response.data.results || [];
+        const results = response.data.results || [];
 
         if (results.length === 0 && searchTerm) {
           setNoResults(true);
@@ -42,9 +42,7 @@ function Home({ searchTerm }) {
         setMovies(sortedResults);
       } catch (err) {
         console.error('Erro ao carregar filmes:', err);
-
         if (err.response) {
-          // Erro retornado pela API
           if (err.response.status === 401) {
             setError('Erro de autenticação. Verifique sua API key.');
           } else if (err.response.status === 404) {
@@ -53,10 +51,8 @@ function Home({ searchTerm }) {
             setError(`Erro do servidor: ${err.response.statusText}`);
           }
         } else if (err.request) {
-          // Erro na requisição (ex: problema de rede)
           setError('Falha na comunicação com o servidor. Verifique sua conexão.');
         } else {
-          // Outros erros (ex: erro de código)
           setError('Erro inesperado ao carregar filmes.');
         }
       } finally {
@@ -88,30 +84,30 @@ function Home({ searchTerm }) {
   };
 
   return (
-    <div className="container my-4" style={{ paddingTop: '70px' }}>
-      {/* Dropdown de ordenação */}
-      {/* Dropdown de ordenação (somente se não estiver carregando) */}
-      {!loading && (
-        <div className="d-flex justify-content-end align-items-center gap-2 mb-3">
-          <label className="mb-0 fw-bold" htmlFor="sortSelect">Filtro:</label>
-          <select
-            id="sortSelect"
-            className="form-select w-auto"
-            value={sortOption}
-            onChange={(e) => setSortOption(e.target.value)}
-          >
-            <option value="vote_desc">Nota: Maior para menor</option>
-            <option value="vote_asc">Nota: Menor para maior</option>
-            <option value="name_asc">Título: A-Z</option>
-            <option value="name_desc">Título: Z-A</option>
-            <option value="year_desc">Ano: Mais recente</option>
-            <option value="year_asc">Ano: Mais antigo</option>
-          </select>
-        </div>
-      )}
+    <div className="container my-5" style={{ paddingTop: '80px' }}>
+      <div className="d-flex justify-content-between align-items-center flex-wrap mb-4">
+        <h2 className="text-white fw-bold mb-3 mb-md-0">🎬 Filmes em Alta</h2>
 
+        {!loading && (
+          <div className="d-flex align-items-center gap-2">
+            <label htmlFor="sortSelect" className="text-white fw-semibold mb-0">Ordenar:</label>
+            <select
+              id="sortSelect"
+              className="form-select form-select-sm bg-dark text-white border-secondary"
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+            >
+              <option value="vote_desc">Nota: Maior para menor</option>
+              <option value="vote_asc">Nota: Menor para maior</option>
+              <option value="name_asc">Título: A-Z</option>
+              <option value="name_desc">Título: Z-A</option>
+              <option value="year_desc">Ano: Mais recente</option>
+              <option value="year_asc">Ano: Mais antigo</option>
+            </select>
+          </div>
+        )}
+      </div>
 
-      {/* Loader */}
       {loading && (
         <div className="d-flex justify-content-center my-5">
           <div className="spinner-border text-primary" role="status" aria-label="Carregando">
@@ -120,17 +116,14 @@ function Home({ searchTerm }) {
         </div>
       )}
 
-      {/* Mensagem de erro */}
       {error && <div className="alert alert-danger">{error}</div>}
 
-      {/* Nenhum resultado */}
       {noResults && (
         <div className="alert alert-warning">
           Nenhum filme encontrado para "{searchTerm}"
         </div>
       )}
 
-      {/* Lista de filmes */}
       <div className="row">
         {movies.map((movie) => (
           <div key={movie.id} className="col-6 col-md-4 col-lg-3 mb-4">

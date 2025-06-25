@@ -7,7 +7,6 @@ import ptBR from 'date-fns/locale/pt-BR';
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const IMAGE_BASE = import.meta.env.VITE_IMAGE_BASE;
-const PROFILE_IMAGE = 'https://image.tmdb.org/t/p/w185';
 
 function MovieDetail() {
   const { id } = useParams();
@@ -27,12 +26,10 @@ function MovieDetail() {
         setMovie(response.data);
 
         const creditsRes = await axios.get(`${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=pt-BR`);
-        setCast(creditsRes.data.cast.slice(0, 6));
+        setCast(creditsRes.data.cast.slice(0, 6)); // 6 atores para 2 linhas x 3 colunas
 
         const videosRes = await axios.get(`${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=pt-BR`);
-        const trailer = videosRes.data.results.find(
-          (vid) => vid.type === 'Trailer' && vid.site === 'YouTube'
-        );
+        const trailer = videosRes.data.results.find(vid => vid.type === 'Trailer' && vid.site === 'YouTube');
         if (trailer) setTrailerKey(trailer.key);
       } catch (err) {
         setError('Erro ao carregar detalhes do filme.');
@@ -43,23 +40,21 @@ function MovieDetail() {
     fetchMovie();
   }, [id]);
 
-  if (loading) {
+  if (loading)
     return (
       <div className="d-flex justify-content-center my-5">
-        <div className="spinner-border text-primary" role="status">
+        <div className="spinner-border text-primary" role="status" aria-label="Carregando">
           <span className="visually-hidden">Carregando...</span>
         </div>
       </div>
     );
-  }
 
-  if (error) {
+  if (error)
     return (
       <div className="container my-4">
         <div className="alert alert-danger">{error}</div>
       </div>
     );
-  }
 
   if (!movie) return null;
 
@@ -70,69 +65,72 @@ function MovieDetail() {
   const voteClass = movie.vote_average > 6 ? 'text-success' : 'text-danger';
 
   return (
-    <div className="container my-4" style={{ paddingTop: '80px' }}>
-      <button className="btn btn-outline-secondary mb-4" onClick={() => navigate(-1)}>
+    <div className="container my-4" style={{ paddingTop: '70px', color: '#eee' }}>
+      <button className="btn btn-secondary mb-3 d-flex align-items-center" onClick={() => navigate(-1)}>
         <i className="bi bi-arrow-left me-2"></i> Voltar
       </button>
 
-      <div className="row g-4 align-items-start">
-        {/* Poster */}
-        <div className="col-md-4 col-lg-3">
+      <div className="row g-4">
+        <div className="col-md-4 d-flex flex-column align-items-center">
           <img
-            src={movie.poster_path ? `${IMAGE_BASE}${movie.poster_path}` : 'https://via.placeholder.com/500x750?text=Sem+Imagem'}
+            src={movie.poster_path ? `${IMAGE_BASE}${movie.poster_path}` : 'https://via.placeholder.com/350x525?text=Sem+Imagem'}
             alt={movie.title}
             className="img-fluid rounded shadow"
-            style={{ maxHeight: '420px', objectFit: 'cover' }}
+            style={{ maxHeight: '525px', width: 'auto' }}
           />
-        </div>
 
-        {/* Informações */}
-        <div className="col-md-8 col-lg-9">
-          <h2 className="fw-bold mb-2">{movie.title}</h2>
-          <p className="mb-1"><strong>Data de lançamento:</strong> {formattedDate}</p>
-          <p className="mb-1"><strong>Nota:</strong> <span className={`fw-semibold ${voteClass}`}>{movie.vote_average.toFixed(1)}</span></p>
-          <p className="mb-1"><strong>Duração:</strong> {movie.runtime ? `${movie.runtime} min` : 'Indisponível'}</p>
-          <p className="mb-1"><strong>Gêneros:</strong> {movie.genres?.map(g => g.name).join(', ') || 'Indisponível'}</p>
-          <p className="mt-3"><strong>Sinopse:</strong></p>
-          <p className="mb-1">{movie.overview || 'Sem sinopse disponível.'}</p>
-        </div>
-      </div>
+          {/* Título elenco */}
+          <h4 className="elenco-title">Elenco principal</h4>
 
-      {/* Trailer (acima do elenco) */}
-      {trailerKey && (
-        <div className="mt-5">
-          <h4 className="mb-3">Trailer oficial</h4>
-          <div className="ratio ratio-16x9">
-            <iframe
-              src={`https://www.youtube.com/embed/${trailerKey}`}
-              title="Trailer"
-              allowFullScreen
-            ></iframe>
+          {/* Elenco em grid */}
+          <div className="elenco-grid">
+            {cast.length > 0 ? (
+              cast.map(actor => (
+                <div key={actor.cast_id} className="elenco-card">
+                  <img
+                    src={actor.profile_path ? `${IMAGE_BASE}${actor.profile_path}` : 'https://via.placeholder.com/100x140?text=Sem+Foto'}
+                    alt={actor.name}
+                    className="img-fluid rounded shadow-sm"
+                  />
+                  <small title={actor.name}>{actor.name}</small>
+                  <small className="character" title={actor.character}>como {actor.character}</small>
+                </div>
+              ))
+            ) : (
+              <p>Elenco indisponível.</p>
+            )}
           </div>
         </div>
-      )}
 
-      {/* Elenco */}
-      <div className="mt-5">
-        <h4 className="mb-3">Elenco principal</h4>
-        {cast.length > 0 ? (
-          <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3">
-            {cast.map(actor => (
-              <div key={actor.cast_id} className="col text-center">
-                <img
-                  src={actor.profile_path ? `${PROFILE_IMAGE}${actor.profile_path}` : 'https://via.placeholder.com/150x225?text=Sem+Foto'}
-                  alt={actor.name}
-                  className="img-fluid rounded shadow-sm mb-2"
-                  style={{ height: '160px', objectFit: 'cover', width: '100%' }}
-                />
-                <div className="fw-medium small">{actor.name}</div>
-                <small className="text-muted">{actor.character}</small>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="text-muted">Elenco indisponível.</p>
-        )}
+        <div className="col-md-8 d-flex flex-column justify-content-start">
+          <h2 className="mb-2">{movie.title}</h2>
+          <p><strong>Data de lançamento:</strong> {formattedDate}</p>
+          <p>
+            <strong>Nota:</strong>{' '}
+            <span className={voteClass} style={{ fontWeight: '700', fontSize: '1.2rem' }}>
+              {movie.vote_average.toFixed(1)}
+            </span>
+          </p>
+
+          <p className="movie-synopsis">
+            <strong>Sinopse:</strong><br />
+            {movie.overview || 'Sem sinopse disponível.'}
+          </p>
+
+          <p><strong>Duração:</strong> {movie.runtime ? `${movie.runtime} minutos` : 'Indisponível'}</p>
+          <p><strong>Gêneros:</strong> {movie.genres?.map(g => g.name).join(', ') || 'Indisponível'}</p>
+
+          {trailerKey && (
+            <div className="ratio ratio-16x9 mt-3 mb-4 shadow-sm rounded">
+              <iframe
+                src={`https://www.youtube.com/embed/${trailerKey}`}
+                title="Trailer"
+                allowFullScreen
+                style={{ borderRadius: '8px' }}
+              ></iframe>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
