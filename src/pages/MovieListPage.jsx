@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import MovieCard from '../components/MovieCard';
 
-const API_KEY = '063f1d50791f7f275acde73b162729f2';
-const BASE_URL = 'https://api.themoviedb.org/3';
+const API_KEY = import.meta.env.VITE_API_KEY;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function MovieListPage({ title, endpoint, fixedSort }) {
   const [movies, setMovies] = useState([]);

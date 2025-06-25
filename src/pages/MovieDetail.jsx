@@ -4,14 +4,16 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
-const API_KEY = '063f1d50791f7f275acde73b162729f2';
-const BASE_URL = 'https://api.themoviedb.org/3';
-const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
+const API_KEY = import.meta.env.VITE_API_KEY;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+const IMAGE_BASE = import.meta.env.VITE_IMAGE_BASE;
 
 function MovieDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
+  const [cast, setCast] = useState([]);
+  const [trailerKey, setTrailerKey] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -20,8 +22,20 @@ function MovieDetail() {
       setLoading(true);
       setError('');
       try {
+        // Busca dados principais do filme
         const response = await axios.get(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=pt-BR`);
         setMovie(response.data);
+
+        // Busca elenco
+        const creditsRes = await axios.get(`${BASE_URL}/movie/${id}/credits?api_key=${API_KEY}&language=pt-BR`);
+        setCast(creditsRes.data.cast.slice(0, 5)); // pega 5 primeiros atores
+
+        // Busca vídeos (trailer)
+        const videosRes = await axios.get(`${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=pt-BR`);
+        const trailer = videosRes.data.results.find(
+          (vid) => vid.type === 'Trailer' && vid.site === 'YouTube'
+        );
+        if (trailer) setTrailerKey(trailer.key);
       } catch (err) {
         setError('Erro ao carregar detalhes do filme.');
       } finally {
@@ -74,6 +88,31 @@ function MovieDetail() {
           <p><strong>Sinopse:</strong> {movie.overview || 'Sem sinopse disponível.'}</p>
           <p><strong>Duração:</strong> {movie.runtime ? `${movie.runtime} minutos` : 'Indisponível'}</p>
           <p><strong>Gêneros:</strong> {movie.genres?.map(g => g.name).join(', ') || 'Indisponível'}</p>
+
+          {/* Elenco */}
+          <h4>Elenco principal</h4>
+          <ul>
+            {cast.length > 0 ? (
+              cast.map(actor => (
+                <li key={actor.cast_id}>
+                  {actor.name} como {actor.character}
+                </li>
+              ))
+            ) : (
+              <p>Elenco indisponível.</p>
+            )}
+          </ul>
+
+          {/* Trailer */}
+          {trailerKey && (
+            <div className="ratio ratio-16x9 mt-4">
+              <iframe
+                src={`https://www.youtube.com/embed/${trailerKey}`}
+                title="Trailer"
+                allowFullScreen
+              ></iframe>
+            </div>
+          )}
         </div>
       </div>
     </div>
