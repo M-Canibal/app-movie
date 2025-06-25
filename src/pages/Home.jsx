@@ -86,36 +86,48 @@ function Home({ searchTerm }) {
 
   return (
     <div className="container" style={{ paddingTop: '80px' }}>
-      <div className="d-flex justify-content-between align-items-center flex-wrap mb-4">
-        <h2 className="home-title">Filmes em alta</h2>
+      {!error && !noResults && (
+        <div className="d-flex justify-content-between align-items-center flex-wrap mb-4">
+          <h2 className="home-title">Filmes em alta</h2>
 
-        {!loading && (
-          <div className="d-flex align-items-center gap-2">
-            <label htmlFor="sortSelect" className="text-white fw-semibold mb-0">Ordenar:</label>
-            <select
-              id="sortSelect"
-              className="form-select form-select-sm bg-dark text-white border-secondary"
-              value={sortOption}
-              onChange={(e) => setSortOption(e.target.value)}
-            >
-              <option value="vote_desc">Nota: Maior para menor</option>
-              <option value="vote_asc">Nota: Menor para maior</option>
-              <option value="name_asc">Título: A-Z</option>
-              <option value="name_desc">Título: Z-A</option>
-              <option value="year_desc">Ano: Mais recente</option>
-              <option value="year_asc">Ano: Mais antigo</option>
-            </select>
-          </div>
-        )}
-      </div>
+          {!loading && (
+            <div className="d-flex align-items-center gap-2">
+              <label htmlFor="sortSelect" className="text-white fw-semibold mb-0">Ordenar:</label>
+              <select
+                id="sortSelect"
+                className="form-select form-select-sm bg-dark text-white border-secondary"
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+              >
+                <option value="vote_desc">Nota: Maior para menor</option>
+                <option value="vote_asc">Nota: Menor para maior</option>
+                <option value="name_asc">Título: A-Z</option>
+                <option value="name_desc">Título: Z-A</option>
+                <option value="year_desc">Ano: Mais recente</option>
+                <option value="year_asc">Ano: Mais antigo</option>
+              </select>
+            </div>
+          )}
+        </div>
+      )}
 
       {loading && <LoadingSpinner />}
 
-      {error && <div className="alert alert-danger">{error}</div>}
+      {error && (
+        <div className="alert alert-danger text-center mt-5">
+          {error}
+        </div>
+      )}
 
       {noResults && (
-        <div className="alert alert-warning">
-          Nenhum filme encontrado para "{searchTerm}"
+        <div className="no-results text-center mt-5">
+          <i className="bi bi-emoji-frown no-results-icon fs-1 text-warning"></i>
+          <h2 className="text-light mt-3">Nenhum filme encontrado</h2>
+          <p className="text-secondary">
+            Não encontramos resultados para <strong>"{searchTerm}"</strong>.
+            <br />
+            Tente outro título ou palavra-chave.
+          </p>
         </div>
       )}
 
