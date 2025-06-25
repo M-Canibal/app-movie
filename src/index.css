@@ -24,12 +24,13 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
- justify-content: center;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: #242424;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 h1 {
@@ -54,6 +55,34 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Espaçamento e hover suave para itens do menu no mobile */
+.navbar-nav .nav-link {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem; /* arredondar cantos */
+  transition: background-color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  outline: none;
+}
+
+/* Para que o menu tenha gap entre itens quando aberto no mobile */
+.navbar-collapse .navbar-nav {
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+}
+
+/* Ajuste do input no mobile (abaixo do menu) */
+.navbar-collapse input[type="search"] {
+  margin-top: 1rem;
+  max-width: 100%;
 }
 
 @media (prefers-color-scheme: light) {

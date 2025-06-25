@@ -6,16 +6,28 @@ function Navbar({ onSearch }) {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
       <div className="container">
-        <Link className="navbar-brand" to="/">MovieApp</Link>
-        <button className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <Link className="navbar-brand fw-bold" to="/">MovieApp</Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Alternar navegação"
+        >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+
+        <div
+          className="collapse navbar-collapse d-flex align-items-center justify-content-between"
+          id="navbarNav"
+        >
           <ul
-            className="navbar-nav me-auto mb-2 mb-lg-0 d-flex"
-            style={{ justifyContent: 'center', flexGrow: 1, gap: '1rem' }}
+            className="navbar-nav mx-auto mb-2 mb-lg-0 d-flex"
+            style={{ justifyContent: 'center', gap: '2rem', width: '100%' }}
           >
             <li className="nav-item">
               <Link className="nav-link d-flex align-items-center" to="/">
@@ -38,11 +50,13 @@ function Navbar({ onSearch }) {
               </Link>
             </li>
           </ul>
+
           <input
             type="search"
             className="form-control w-auto"
             placeholder="Buscar filmes..."
             onChange={handleSearch}
+            style={{ minWidth: '200px' }}
           />
         </div>
       </div>

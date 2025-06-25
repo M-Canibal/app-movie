@@ -90,23 +90,26 @@ function Home({ searchTerm }) {
   return (
     <div className="container my-4" style={{ paddingTop: '70px' }}>
       {/* Dropdown de ordenação */}
-      <div className="d-flex justify-content-end align-items-center gap-2 mb-3">
-        <label className="mb-0 fw-bold" htmlFor="sortSelect">Filtro:</label>
-        <select
-          id="sortSelect"
-          className="form-select w-auto"
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-          disabled={loading}
-        >
-          <option value="vote_desc">Nota: Maior para menor</option>
-          <option value="vote_asc">Nota: Menor para maior</option>
-          <option value="name_asc">Título: A-Z</option>
-          <option value="name_desc">Título: Z-A</option>
-          <option value="year_desc">Ano: Mais recente</option>
-          <option value="year_asc">Ano: Mais antigo</option>
-        </select>
-      </div>
+      {/* Dropdown de ordenação (somente se não estiver carregando) */}
+      {!loading && (
+        <div className="d-flex justify-content-end align-items-center gap-2 mb-3">
+          <label className="mb-0 fw-bold" htmlFor="sortSelect">Filtro:</label>
+          <select
+            id="sortSelect"
+            className="form-select w-auto"
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+          >
+            <option value="vote_desc">Nota: Maior para menor</option>
+            <option value="vote_asc">Nota: Menor para maior</option>
+            <option value="name_asc">Título: A-Z</option>
+            <option value="name_desc">Título: Z-A</option>
+            <option value="year_desc">Ano: Mais recente</option>
+            <option value="year_asc">Ano: Mais antigo</option>
+          </select>
+        </div>
+      )}
+
 
       {/* Loader */}
       {loading && (
