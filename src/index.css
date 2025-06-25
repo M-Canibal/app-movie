@@ -324,6 +324,18 @@ small {
   color: #fff !important;
 }
 
+/* ===== Footer ===== */
+footer.footer-custom {
+  width: 100%;                /* ocupa toda a largura */
+  text-align: center;
+  padding: 1rem 0;
+  margin-top: 2rem;           /* espaçamento superior */
+  flex-shrink: 0;
+  box-sizing: border-box;     /* garantir padding dentro da largura */
+  border-top: 1px solid #333; /* opcional: uma linha sutil no topo */
+}
+
+
 /* ===== Prefer color scheme light ===== */
 @media (prefers-color-scheme: light) {
   :root {
