@@ -27,7 +27,7 @@ function MovieCard({ movie }) {
         loading="lazy"
       />
       <div className="justify-content-between d-flex flex-column py-3 px-3">
-        <h2 className="fs-6 fw-bold text-light mb-1" title={movie.title}>{movie.title}</h2>
+        <h2 className="fs-6 fw-bold text-light mb-1 text-truncate" title={movie.title}>{movie.title}</h2>
         <p className="fs-6 fw-light text-secondary mb-2">{formattedDate}</p>
         <span
           className={`align-self-start px-2 py-1 rounded-pill fw-bold fs-6 text-white ${voteClass === 'text-success' ? 'bg-success' : 'bg-danger'}`}

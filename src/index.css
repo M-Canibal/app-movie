@@ -14,15 +14,11 @@
 
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
   background-color: #121212;
   color: #eee;
+  min-width: 320px;
+  min-height: 100vh;
 }
-
 
 /* ===== Navbar ===== */
 .navbar-collapse.show {
@@ -36,7 +32,6 @@ body {
 }
 
 /* ===== MovieDetail ===== */
-
 .cast-img {
   max-height: 140px;
   transition: transform 0.3s ease;
@@ -47,27 +42,15 @@ body {
 }
 
 /* ===== No Result ===== */
-
 .no-results {
   max-width: 600px;
-}
-
-@media (min-width: 768px) {
-  .movie-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 992px) {
-  .movie-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+  margin: 0 auto;
 }
 
 /* ===== Movie Card ===== */
 .movie-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-
+  height: 100%;
 }
 
 .movie-card:hover {
@@ -82,8 +65,6 @@ body {
 .movie-card:hover img {
   transform: scale(1.05);
 }
-
-
 
 /* ===== Prefer color scheme light ===== */
 @media (prefers-color-scheme: light) {
