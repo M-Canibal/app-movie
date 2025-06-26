@@ -158,10 +158,7 @@ small {
 
 
 /* ===== Home ===== */
-.hero {
-  justify-content: space-between;
-  align-items: center;
-}
+
 
 .home-title {
   font-size: 2rem;
