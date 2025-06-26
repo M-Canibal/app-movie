@@ -14,7 +14,7 @@ function Home({ searchTerm }) {
     <div className="container" style={{ paddingTop: '80px' }}>
       {!error && !noResults && (
         <div className="d-flex justify-content-between align-items-center flex-wrap mb-4">
-          <h2 className="fs-2 text-white">Filmes em alta</h2>
+          <h2 className="text-white">Filmes em alta</h2>
 
           {!loading && (
             <SortDropdown sortOption={sortOption} setSortOption={setSortOption} />
@@ -26,11 +26,14 @@ function Home({ searchTerm }) {
       {error && <ErrorAlert message={error} />}
       {noResults && <NoResults searchTerm={searchTerm} />}
 
-      <div className="movie-grid">
+      <div className="row g-4">
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={movie.id}>
+            <MovieCard movie={movie} />
+          </div>
         ))}
       </div>
+
     </div>
   );
 }

@@ -32,7 +32,6 @@ function Navbar({ onSearch }) {
       });
     });
 
-    // Cleanup event listeners
     return () => {
       navLinks.forEach(link => {
         link.replaceWith(link.cloneNode(true));
@@ -41,7 +40,7 @@ function Navbar({ onSearch }) {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm fw-semibold">
       <div className="container">
         <Link className="navbar-brand fw-bold" to="/">MovieApp</Link>
         <button
@@ -57,7 +56,7 @@ function Navbar({ onSearch }) {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 nav-center-gap">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center flex-grow-1 gap-3">
             <NavItem to="/" iconClass="bi bi-fire">Tendências</NavItem>
             <NavItem to="/populares" iconClass="bi bi-star-fill">Populares</NavItem>
             <NavItem to="/lancamentos" iconClass="bi bi-calendar-event">Lançamentos</NavItem>
@@ -66,7 +65,8 @@ function Navbar({ onSearch }) {
 
           <input
             type="search"
-            className="form-control w-auto align-self-center navbar-search"
+            className="form-control ms-3 teste"
+            style={{ maxWidth: '250px', alignSelf: 'center' }}
             placeholder="Buscar filmes..."
             onChange={handleSearch}
           />

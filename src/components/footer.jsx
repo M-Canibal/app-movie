@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-light py-4 mt-4">
+    <footer className="bg-dark text-light py-4 mt-4 vw-100">
       <div className="container d-flex flex-column flex-sm-row justify-content-between align-items-center">
         <p className="mb-2 mb-sm-0">
           &copy; {new Date().getFullYear()} Info Movies. Todos os direitos reservados.

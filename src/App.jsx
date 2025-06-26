@@ -17,21 +17,11 @@ function App() {
           <Route path="/" element={<Home searchTerm={searchTerm} />} />
           <Route path="/movie/:id" element={<MovieDetail />} />
           <Route path="/populares" element={<MovieListPage title="Populares" endpoint="/movie/popular" searchTerm={searchTerm} />} />
-          <Route
-            path="/lancamentos"
-            element={
-              <MovieListPage
-                title="Lançamentos"
-                endpoint="/movie/now_playing"
-                fixedSort={{ field: 'release_date', direction: 'desc' }}
-                searchTerm={searchTerm}
-              />
-            }
-          />
+          <Route path="/lancamentos" element={<MovieListPage title="Lançamentos" endpoint="/movie/now_playing" fixedSort={{ field: 'release_date', direction: 'desc' }} searchTerm={searchTerm} />} />
           <Route path="/top" element={<MovieListPage title="Top Avaliados" endpoint="/movie/top_rated" searchTerm={searchTerm} />} />
         </Routes>
       </main>
-      <Footer /> {/* Footer no fim do layout */}
+      <Footer />
     </>
   );
 }
