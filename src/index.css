@@ -36,73 +36,21 @@ body {
 }
 
 /* ===== MovieDetail ===== */
-.container {
-  color: #eee;
-}
 
-p,
-small {
-  color: #ddd;
-}
-
-.movie-synopsis {
-  line-height: 1.5;
-  font-size: 1rem;
-  color: #ddd;
-}
-
-.elenco-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: auto;
-  gap: 1rem;
-  margin-top: 1rem;
-  width: 100%;
-  justify-items: center;
-}
-
-.elenco-card {
-  text-align: center;
-  max-width: 120px;
-}
-
-.elenco-card img {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
-  transition: transform 0.3s ease;
-  border-radius: 8px;
+.cast-img {
   max-height: 140px;
-  width: auto;
+  transition: transform 0.3s ease;
 }
 
-.elenco-card img:hover {
+.cast-img:hover {
   transform: scale(1.05);
 }
-
-.elenco-card small {
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #ccc;
-  font-weight: 600;
-}
-
-.elenco-card .character {
-  font-size: 0.85rem;
-  color: #999;
-  white-space: normal;
-  font-weight: 400;
-  margin-top: 0.15rem;
-}
-
 
 /* ===== No Result ===== */
 
 .no-results {
   max-width: 600px;
 }
-
-
 
 @media (min-width: 768px) {
   .movie-grid {
@@ -134,6 +82,7 @@ small {
 .movie-card:hover img {
   transform: scale(1.05);
 }
+
 
 
 /* ===== Prefer color scheme light ===== */

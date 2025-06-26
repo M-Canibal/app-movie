@@ -26,9 +26,9 @@ function MovieListPage({ title, endpoint, searchTerm }) {
 
       {noResults && <NoResults searchTerm={searchTerm} />}
 
-      <div className="row g-4">
+      <div className="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-5 g-4">
         {movies.map((movie) => (
-          <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={movie.id}>
+          <div className="col" key={movie.id}>
             <MovieCard movie={movie} />
           </div>
         ))}
