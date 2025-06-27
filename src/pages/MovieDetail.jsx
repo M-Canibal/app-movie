@@ -40,7 +40,6 @@ function MovieDetail() {
       <BackButton />
 
       <div className="row gy-4 align-items-start">
-        {/* Poster */}
         <div className="col-12 col-lg-4 text-center">
           <img
             src={
@@ -53,8 +52,6 @@ function MovieDetail() {
             style={{ maxHeight: '525px', objectFit: 'cover' }}
           />
         </div>
-
-        {/* Informações do filme + trailer + elenco */}
         <div className="col-12 col-lg-8">
           <h2 className="fs-3 fw-bold text-center text-lg-start mb-4">{movie.title}</h2>
 
@@ -121,7 +118,6 @@ function MovieDetail() {
             </>
           )}
 
-          {/* Elenco aqui, logo abaixo do trailer */}
           <div className="mt-5">
             <h4 className="mb-4 text-start">
               <i className="bi bi-people-fill me-2 text-warning fs-5"></i>

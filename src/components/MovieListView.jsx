@@ -6,7 +6,6 @@ import SortDropdown from '../components/SortDropdown';
 import ErrorAlert from '../components/ErrorAlert';
 import { useFetchMovies } from '../hooks/useFetchMovies';
 
-// Mapeia os títulos para ícones Bootstrap ou emojis
 const titleIcons = {
   'Filmes em alta': 'bi-fire',
   'Populares': 'bi-hand-thumbs-up',
@@ -18,7 +17,6 @@ function MovieListView({ title = 'Filmes em alta', endpoint = '/trending/movie/d
   const [sortOption, setSortOption] = useState('vote_desc');
   const { movies, loading, error, noResults } = useFetchMovies(searchTerm, sortOption, endpoint);
 
-  // Pega o ícone correspondente ao título ou usa um padrão
   const iconClass = titleIcons[title] || 'bi-film';
 
   return (
