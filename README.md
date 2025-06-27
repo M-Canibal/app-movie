@@ -1,12 +1,42 @@
-# React + Vite
+# 🎬 MovieApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma aplicação SPA (Single Page Application) desenvolvida em React para exibir filmes utilizando a [API do The Movie Database (TMDB)](https://www.themoviedb.org/documentation/api). O projeto foi construído como parte de um desafio técnico para vaga de desenvolvedor front-end pleno.
 
-Currently, two official plugins are available:
+## 🔍 Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Exibição de filmes em destaque (Trending), Populares, Lançamentos e Top Avaliados.
+- Busca de filmes por título em tempo real.
+- Cards com imagem, título, data de lançamento e nota (com destaque visual para notas acima de 6).
+- Página de detalhes com:
+  - Poster em alta qualidade.
+  - Título, sinopse, data de lançamento, duração e gêneros.
+  - Trailer (embed em telas grandes e botão para YouTube em telas menores).
+  - Elenco principal (limitado a 6 membros).
+- Interface responsiva para desktop e mobile.
+- Navegação entre categorias sem recarregar a página.
+- Experiência fluida e moderna com Bootstrap e ícones do Bootstrap Icons.
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologias Utilizadas
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [React](https://reactjs.org/)
+- [React Router DOM](https://reactrouter.com/)
+- [Axios](https://axios-http.com/)
+- [Bootstrap 5](https://getbootstrap.com/)
+- [Bootstrap Icons](https://icons.getbootstrap.com/)
+- [Date-fns](https://date-fns.org/) com locale pt-BR
+- API pública do [TMDB](https://www.themoviedb.org/)
+
+## 📦 Instalação
+
+1. Clone o repositório:
+    git clone https://github.com/M-Canibal/app-movie.git
+    cd app-movie
+
+ 2. Instale as dependências:
+    npm install
+ 
+ 3. Rode o projeto:
+    npm run dev
+
+
+Desenvolvido por Matheus Canibal 🚀
