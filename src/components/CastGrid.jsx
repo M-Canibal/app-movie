@@ -9,13 +9,22 @@ export default function CastGrid({ cast }) {
             <img
               src={actor.profile_path ? `${IMAGE_BASE}${actor.profile_path}` : 'https://via.placeholder.com/100x140?text=Sem+Foto'}
               alt={actor.name}
-              className="img-fluid rounded shadow-sm mb-2"
-              style={{ maxHeight: '140px', objectFit: 'cover' }}
+              className="img-fluid rounded shadow-sm mb-2 cast-img"
+              style={{ maxHeight: '140px', objectFit: 'cover', cursor: 'pointer' }}
+              title={`${actor.name} como ${actor.character}`}
             />
-            <small className="d-block text-truncate text-light fw-semibold" title={actor.name}>
+            <small
+              className="d-block text-truncate text-light fw-semibold"
+              title={actor.name}
+              style={{ maxWidth: '120px', margin: '0 auto' }}
+            >
               {actor.name}
             </small>
-            <small className="d-block text-muted" style={{ fontSize: '0.85rem' }} title={actor.character}>
+            <small
+              className="d-block text-muted"
+              style={{ fontSize: '0.85rem', maxWidth: '120px', margin: '0 auto' }}
+              title={actor.character}
+            >
               como {actor.character}
             </small>
           </div>

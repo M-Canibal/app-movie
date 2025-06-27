@@ -13,9 +13,10 @@
 }
 
 body {
-  margin: 0;
+  padding-top: 70px;
   background-color: #121212;
   color: #eee;
+  margin: 0;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -34,11 +35,67 @@ body {
 /* ===== MovieDetail ===== */
 .cast-img {
   max-height: 140px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .cast-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8);
+}
+
+/* CastGrid container para responsividade */
+.cast-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 1rem !important;
+}
+
+@media (max-width: 991.98px) {
+  .cast-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Poster imagem com sombra e hover */
+img.img-fluid.rounded.shadow-lg {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+}
+img.img-fluid.rounded.shadow-lg:hover {
   transform: scale(1.05);
+}
+
+/* Trailer botão estilizado */
+.btn-danger {
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 30px;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.6);
+  transition: box-shadow 0.3s ease;
+}
+.btn-danger:hover {
+  box-shadow: 0 6px 18px rgba(220, 53, 69, 0.9);
+}
+
+/* Títulos maiores e mais espaçados */
+h1 {
+  font-size: 2.5rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 1rem;
+}
+
+/* Badges ajustados para boa legibilidade e espaçamento */
+.badge {
+  padding: 0.6em 1em;
+  border-radius: 20px;
+  font-weight: 600;
+  margin-right: 0.5rem;
 }
 
 /* ===== No Result ===== */
@@ -66,6 +123,23 @@ body {
   transform: scale(1.05);
 }
 
+.bg-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.25rem; /* arredondado similar ao .rounded */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.bg-glass:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+}
+
+
 /* ===== Prefer color scheme light ===== */
 @media (prefers-color-scheme: light) {
   :root {
@@ -81,3 +155,6 @@ body {
     background-color: #f9f9f9;
   }
 }
+
+
+
