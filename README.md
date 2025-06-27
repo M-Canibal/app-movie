@@ -1,6 +1,6 @@
 # 🎬 MovieApp
 
-Uma aplicação SPA (Single Page Application) desenvolvida em React para exibir filmes utilizando a [API do The Movie Database (TMDB)](https://www.themoviedb.org/documentation/api). O projeto foi construído como parte de um desafio técnico para vaga de desenvolvedor front-end pleno.
+Uma aplicação SPA (Single Page Application) desenvolvida em React para exibir filmes utilizando a [API do The Movie Database (TMDB)](https://www.themoviedb.org/documentation/api).
 
 ## 🔍 Funcionalidades
 
